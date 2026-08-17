@@ -15,16 +15,31 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     margin: 0;
-    min-width: 320px;
+    min-width: 0;
+    overflow-x: hidden;
     background: var(--background);
     color: var(--text);
     line-height: 1.5;
 }
 
+button,
+input {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .site-header {
-    padding: 2.5rem 1rem 3rem;
+    padding: calc(2rem + env(safe-area-inset-top)) 1rem 2.75rem;
     background: linear-gradient(135deg, var(--navy), #1e40af);
     color: white;
 }
@@ -37,9 +52,9 @@ body {
 }
 
 .eyebrow {
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.35rem;
     color: #bfdbfe;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -53,24 +68,25 @@ p {
 }
 
 h1 {
-    margin-bottom: 0.35rem;
-    font-size: clamp(2.25rem, 8vw, 4.5rem);
+    margin-bottom: 0.45rem;
+    font-size: clamp(2.1rem, 11vw, 4.5rem);
     line-height: 1;
 }
 
 .subtitle {
+    max-width: 28rem;
     margin-bottom: 0;
     color: #dbeafe;
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
 .app-container {
-    padding: 1.25rem 0 3rem;
+    padding: 1rem 0 2rem;
 }
 
 .controls {
-    margin-top: -2.5rem;
-    padding: 1rem;
+    margin-top: -2rem;
+    padding: 0.9rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 1rem;
@@ -83,12 +99,12 @@ h1 {
 
 .search-box input {
     width: 100%;
-    min-height: 3rem;
-    padding: 0.75rem 1rem;
+    min-height: 3.25rem;
+    padding: 0.8rem 1rem;
     border: 1px solid var(--border);
-    border-radius: 0.65rem;
+    border-radius: 0.7rem;
     color: var(--text);
-    font: inherit;
+    background: var(--surface);
     outline: none;
 }
 
@@ -99,30 +115,34 @@ h1 {
 
 .category-list {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 0.85rem;
+    gap: 0.55rem;
+    margin: 0.85rem -0.2rem -0.2rem;
     overflow-x: auto;
-    padding-bottom: 0.2rem;
+    padding: 0.2rem;
+    scrollbar-width: none;
+    touch-action: pan-x;
+}
+
+.category-list::-webkit-scrollbar {
+    display: none;
 }
 
 .category-button,
 .refresh-button {
-    min-height: 2.6rem;
-    padding: 0.55rem 0.9rem;
+    min-height: 2.9rem;
+    padding: 0.65rem 1rem;
     border: 1px solid var(--border);
     border-radius: 999px;
     background: var(--surface);
     color: var(--text);
     cursor: pointer;
-    font: inherit;
-    font-weight: 600;
+    font-weight: 650;
     white-space: nowrap;
 }
 
-.category-button:hover,
-.refresh-button:hover {
-    border-color: var(--blue);
-    color: var(--blue);
+.category-button:active,
+.refresh-button:active {
+    transform: scale(0.98);
 }
 
 .category-button.active {
@@ -138,13 +158,14 @@ h1 {
 }
 
 .status-area {
-    min-height: 2.5rem;
-    padding-top: 1rem;
+    min-height: 3rem;
+    padding-top: 0.9rem;
 }
 
 .status-message {
     margin-bottom: 0;
     color: var(--muted);
+    font-size: 0.95rem;
 }
 
 .error-message {
@@ -155,17 +176,18 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    margin: 1rem 0;
+    gap: 0.75rem;
+    margin: 0.75rem 0 1rem;
 }
 
 .section-heading h2 {
     margin-bottom: 0;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
 }
 
 .refresh-button {
-    border-radius: 0.6rem;
+    min-width: 5.5rem;
+    border-radius: 0.65rem;
     background: var(--navy);
     color: white;
 }
@@ -176,6 +198,7 @@ h1 {
 }
 
 .news-card {
+    min-width: 0;
     overflow: hidden;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -186,7 +209,7 @@ h1 {
 .news-image {
     display: block;
     width: 100%;
-    height: 190px;
+    aspect-ratio: 16 / 9;
     background: var(--navy);
     object-fit: cover;
 }
@@ -198,7 +221,7 @@ h1 {
 .article-source {
     margin-bottom: 0.45rem;
     color: var(--blue);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -206,32 +229,35 @@ h1 {
 
 .news-card h3 {
     margin-bottom: 0.65rem;
-    font-size: 1.15rem;
-    line-height: 1.3;
+    font-size: 1.12rem;
+    line-height: 1.32;
 }
 
 .article-description {
+    margin-bottom: 0;
     color: var(--muted);
+    font-size: 0.95rem;
 }
 
 .article-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.75rem;
     margin-top: 1rem;
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+}
+
+.article-footer time {
+    min-width: 0;
 }
 
 .article-footer a {
+    flex: 0 0 auto;
     color: var(--blue);
     font-weight: 700;
     text-decoration: none;
-}
-
-.article-footer a:hover {
-    text-decoration: underline;
 }
 
 .empty-message {
@@ -241,9 +267,9 @@ h1 {
 }
 
 .site-footer {
-    padding: 1.5rem 0 2rem;
+    padding: 1rem 0 calc(1.5rem + env(safe-area-inset-bottom));
     color: var(--muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-align: center;
 }
 
@@ -275,9 +301,5 @@ h1 {
 @media (min-width: 960px) {
     .news-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .news-image {
-        height: 210px;
     }
 }
