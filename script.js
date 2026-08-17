@@ -1,6 +1,5 @@
-const API_KEY = "f60e15503742451d72661e001d2504c1";
-const API_URL = `https://api.mediastack.com/v1/news?categories=science,business,technology&access_key=${API_KEY}&countries=us,nz,au&limit=5`;
-const COUNTRY = "us";
+const API_KEY = "YOUR_MEDIASTACK_ACCESS_KEY";
+const API_URL = "https://api.mediastack.com/v1/news";
 
 const newsContainer = document.getElementById("news-container");
 const loading = document.getElementById("loading");
@@ -20,6 +19,17 @@ function escapeHtml(value = "") {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+}
+
+function safeUrl(value, fallback = "#") {
+    try {
+        const url = new URL(value, window.location.href);
+        return ["http:", "https:"].includes(url.protocol)
+            ? url.href
+            : fallback;
+    } catch {
+        return fallback;
+    }
 }
 
 function setLoading(isLoading) {
@@ -54,7 +64,7 @@ function displayNews(articles) {
         const searchableText = [
             article.title,
             article.description,
-            article.source?.name
+            article.source
         ].filter(Boolean).join(" ").toLowerCase();
 
         return searchableText.includes(searchTerm);
@@ -66,22 +76,22 @@ function displayNews(articles) {
     }
 
     newsContainer.innerHTML = filteredArticles.map(article => {
-        const imageUrl = article.urlToImage || "https://placehold.co/800x450/172554/ffffff?text=Daily+News";
+        const imageUrl = safeUrl(article.image, "https://placehold.co/800x450/172554/ffffff?text=Daily+News");
         const title = escapeHtml(article.title || "Untitled article");
         const description = escapeHtml(article.description || "No description available.");
-        const source = escapeHtml(article.source?.name || "Unknown source");
-        const url = escapeHtml(article.url || "#");
+        const source = escapeHtml(article.source || "Unknown source");
+        const url = safeUrl(article.url);
 
         return `
             <article class="news-card">
-                <img class="news-image" src="${imageUrl}" alt="" loading="lazy">
+                <img class="news-image" src="${escapeHtml(imageUrl)}" alt="" loading="lazy">
                 <div class="news-content">
                     <p class="article-source">${source}</p>
                     <h3>${title}</h3>
                     <p class="article-description">${description}</p>
                     <div class="article-footer">
-                        <time>${formatDate(article.publishedAt)}</time>
-                        <a href="${url}" target="_blank" rel="noopener noreferrer">Read more</a>
+                        <time>${formatDate(article.published_at)}</time>
+                        <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">Read more</a>
                     </div>
                 </div>
             </article>
@@ -94,23 +104,25 @@ async function loadNews() {
     clearError();
 
     const params = new URLSearchParams({
-        country: COUNTRY,
-        apiKey: API_KEY
+        access_key: API_KEY,
+        languages: "en",
+        countries: "nz",
+        limit: "20"
     });
 
     if (currentCategory !== "general") {
-        params.set("category", currentCategory);
+        params.set("categories", currentCategory);
     }
 
     try {
         const response = await fetch(`${API_URL}?${params}`);
         const data = await response.json();
 
-        if (!response.ok || data.status === "error") {
-            throw new Error(data.message || `Request failed with status ${response.status}`);
+        if (!response.ok || data.error) {
+            throw new Error(data.error?.message || `Request failed with status ${response.status}`);
         }
 
-        currentArticles = Array.isArray(data.articles) ? data.articles : [];
+        currentArticles = Array.isArray(data.data) ? data.data : [];
         displayNews(currentArticles);
     } catch (error) {
         currentArticles = [];
