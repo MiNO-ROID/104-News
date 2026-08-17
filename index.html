@@ -3,15 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A daily news application">
     <title>Daily News</title>
-    <style>
-        body{
-            font-family: monospace;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="news-container">Loading News...</div>
-    <script src="script.js"></script>
+    <header class="site-header">
+        <div class="header-content">
+            <p class="eyebrow">Stay informed</p>
+            <h1>Daily News</h1>
+            <p class="subtitle">The stories that matter today</p>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <section class="controls" aria-label="News controls">
+            <label class="search-box">
+                <span class="sr-only">Search news</span>
+                <input id="search-input" type="search" placeholder="Search headlines..." autocomplete="off">
+            </label>
+            <div id="category-list" class="category-list" aria-label="News categories">
+                <button class="category-button active" data-category="general">Top Stories</button>
+                <button class="category-button" data-category="technology">Technology</button>
+                <button class="category-button" data-category="business">Business</button>
+                <button class="category-button" data-category="sports">Sports</button>
+                <button class="category-button" data-category="science">Science</button>
+            </div>
+        </section>
+
+        <section class="status-area" aria-live="polite">
+            <p id="loading" class="status-message">Loading today's news...</p>
+            <p id="error" class="status-message error-message" hidden></p>
+        </section>
+
+        <section>
+            <div class="section-heading">
+                <h2 id="feed-title">Top Stories</h2>
+                <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
+            </div>
+            <div id="news-container" class="news-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>News articles are provided by the configured news API.</p>
+    </footer>
 </body>
 </html>
