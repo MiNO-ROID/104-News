@@ -1,6 +1,6 @@
 // https://api.mediastack.com/v1/news?access_key=f60e15503742451d72661e001d2504c1
 const apiKey = "f60e15503742451d72661e001d2504c1";
-const apiUrl = `https://api.mediastack.com/v1/news?categories=science&access_key=${apiKey}&countries=nz,au&limit=5`;
+const apiUrl = `https://api.mediastack.com/v1/news?categories=science,business,technology&access_key=${apiKey}&countries=us,nz,au&limit=5`;
 const container = document.getElementById("news-container");
 
 async function loadNews() {
