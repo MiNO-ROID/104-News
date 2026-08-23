@@ -1,4 +1,4 @@
-const API_KEY = "f60e15503742451d72661e001d2504c1";
+const API_KEY = "06aa2fbc275f46761c3e3f7ed69dc4f8";
 const API_URL = "https://api.mediastack.com/v1/news";
 
 const newsContainer = document.getElementById("news-container");
