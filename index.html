@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A daily news application">
+    <meta name="description" content="A mobile daily news application">
     <title>Daily News</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -36,6 +36,7 @@
                 </label>
                 <button id="close-search" class="close-search" type="button" aria-label="Close search">×</button>
             </div>
+
             <div id="category-list" class="category-list" aria-label="News categories">
                 <button class="category-button active" data-category="general">Top Stories</button>
                 <button class="category-button" data-category="technology">Technology</button>
@@ -45,22 +46,84 @@
             </div>
         </section>
 
-        <section class="status-area" aria-live="polite">
-            <p id="loading" class="status-message">Loading today's news...</p>
-            <p id="error" class="status-message error-message" hidden></p>
+        <section id="home-view" class="app-view">
+            <section class="status-area" aria-live="polite">
+                <p id="loading" class="status-message">Loading today's news...</p>
+                <p id="error" class="status-message error-message" hidden></p>
+            </section>
+
+            <section>
+                <div class="section-heading">
+                    <h2 id="feed-title">Top Stories</h2>
+                    <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
+                </div>
+                <div id="news-container" class="news-grid"></div>
+            </section>
         </section>
 
-        <section>
-            <div class="section-heading">
-                <h2 id="feed-title">Top Stories</h2>
-                <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
+        <section id="saved-view" class="app-view" hidden>
+            <div class="view-heading">
+                <h2>Saved articles</h2>
+                <p>Articles you bookmark will appear here.</p>
             </div>
-            <div id="news-container" class="news-grid"></div>
+            <div id="saved-container" class="news-grid"></div>
+        </section>
+
+        <section id="settings-view" class="app-view" hidden>
+            <div class="view-heading">
+                <h2>Settings</h2>
+                <p>These are the current news preferences for your app.</p>
+            </div>
+
+            <div class="settings-card">
+                <div class="setting-row">
+                    <span>Country</span>
+                    <strong>New Zealand</strong>
+                </div>
+                <div class="setting-row">
+                    <span>Language</span>
+                    <strong>English</strong>
+                </div>
+                <div class="setting-row">
+                    <span>News provider</span>
+                    <strong>Mediastack</strong>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="site-footer">
-        <p>News articles are provided by the configured news API.</p>
-    </footer>
+    <nav class="bottom-nav" aria-label="Main navigation">
+        <button class="nav-item active" type="button" data-view="home" aria-current="page">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path>
+            </svg>
+            <span>Home</span>
+        </button>
+
+        <button class="nav-item" type="button" data-view="categories">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M4 5h16M4 12h16M4 19h16"></path>
+                <circle cx="8" cy="5" r="1"></circle>
+                <circle cx="16" cy="12" r="1"></circle>
+                <circle cx="11" cy="19" r="1"></circle>
+            </svg>
+            <span>Categories</span>
+        </button>
+
+        <button class="nav-item" type="button" data-view="saved">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"></path>
+            </svg>
+            <span>Saved</span>
+        </button>
+
+        <button class="nav-item" type="button" data-view="settings">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.12 2.12-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20.3h-3v-.08A1.7 1.7 0 0 0 10.68 18.66a1.7 1.7 0 0 0-1.88.34l-.06.06-2.12-2.12.06-.06A1.7 1.7 0 0 0 7.02 15a1.7 1.7 0 0 0-1.56-1.03H5.38v-3h.08A1.7 1.7 0 0 0 7.02 9.94a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.12-2.12.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1.03-1.56V4.64h3v.08a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06L19.8 8l-.06.06a1.7 1.7 0 0 0-.34 1.88 1.7 1.7 0 0 0 1.56 1.03h.08v3h-.08A1.7 1.7 0 0 0 19.4 15z"></path>
+            </svg>
+            <span>Settings</span>
+        </button>
+    </nav>
 </body>
 </html>
