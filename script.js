@@ -1,4 +1,4 @@
-const API_KEY = "06aa2fbc275f46761c3e3f7ed69dc4f8";
+const API_KEY = "YOUR_MEDIASTACK_ACCESS_KEY";
 const API_URL = "https://api.mediastack.com/v1/news";
 
 const newsContainer = document.getElementById("news-container");
@@ -8,6 +8,9 @@ const searchInput = document.getElementById("search-input");
 const refreshButton = document.getElementById("refresh-button");
 const feedTitle = document.getElementById("feed-title");
 const categoryList = document.getElementById("category-list");
+const searchToggle = document.getElementById("search-toggle");
+const closeSearch = document.getElementById("close-search");
+const searchPanel = document.getElementById("search-panel");
 
 let currentArticles = [];
 let currentCategory = "general";
@@ -24,9 +27,7 @@ function escapeHtml(value = "") {
 function safeUrl(value, fallback = "#") {
     try {
         const url = new URL(value, window.location.href);
-        return ["http:", "https:"].includes(url.protocol)
-            ? url.href
-            : fallback;
+        return ["http:", "https:"].includes(url.protocol) ? url.href : fallback;
     } catch {
         return fallback;
     }
@@ -45,6 +46,18 @@ function showError(message) {
 function clearError() {
     errorMessage.textContent = "";
     errorMessage.hidden = true;
+}
+
+function openSearchPanel() {
+    searchPanel.hidden = false;
+    searchToggle.setAttribute("aria-expanded", "true");
+    searchInput.focus();
+}
+
+function closeSearchPanel() {
+    searchPanel.hidden = true;
+    searchToggle.setAttribute("aria-expanded", "false");
+    searchToggle.focus();
 }
 
 function formatDate(dateString) {
@@ -133,6 +146,15 @@ async function loadNews() {
     }
 }
 
+searchToggle.addEventListener("click", openSearchPanel);
+closeSearch.addEventListener("click", closeSearchPanel);
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && !searchPanel.hidden) {
+        closeSearchPanel();
+    }
+});
+
 categoryList.addEventListener("click", event => {
     const button = event.target.closest(".category-button");
     if (!button) return;
@@ -144,6 +166,7 @@ categoryList.addEventListener("click", event => {
     currentCategory = button.dataset.category;
     feedTitle.textContent = button.textContent;
     searchInput.value = "";
+    closeSearchPanel();
     loadNews();
 });
 
