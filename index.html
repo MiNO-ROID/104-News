@@ -11,18 +11,31 @@
 <body>
     <header class="site-header">
         <div class="header-content">
-            <p class="eyebrow">Stay informed</p>
-            <h1>Daily News</h1>
-            <p class="subtitle">The stories that matter today</p>
+            <div class="header-row">
+                <div>
+                    <p class="eyebrow">Stay informed</p>
+                    <h1>Daily News</h1>
+                    <p class="subtitle">The stories that matter today</p>
+                </div>
+                <button id="search-toggle" class="search-toggle" type="button" aria-expanded="false" aria-controls="search-panel" aria-label="Open search and filters">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                        <circle cx="11" cy="11" r="6.5"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
     <main class="app-container">
-        <section class="controls" aria-label="News controls">
-            <label class="search-box">
-                <span class="sr-only">Search news</span>
-                <input id="search-input" type="search" placeholder="Search headlines..." autocomplete="off">
-            </label>
+        <section id="search-panel" class="controls" aria-label="News controls" hidden>
+            <div class="search-row">
+                <label class="search-box">
+                    <span class="sr-only">Search news</span>
+                    <input id="search-input" type="search" placeholder="Search headlines..." autocomplete="off">
+                </label>
+                <button id="close-search" class="close-search" type="button" aria-label="Close search">×</button>
+            </div>
             <div id="category-list" class="category-list" aria-label="News categories">
                 <button class="category-button active" data-category="general">Top Stories</button>
                 <button class="category-button" data-category="technology">Technology</button>
