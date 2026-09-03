@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Contact Daily News">
+
+    <title>Contact Us - Daily News</title>
+
+    <link rel="stylesheet" href="style.css">
+
+       <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+        <div class="header-top">
+
+            <a href="index.html"
+               class="back-button"
+               aria-label="Back to Daily News">
+               <i class="fa-solid fa-arrow-left-long"></i>
+            </a>
+
+            <div class="header-content">
+
+                <p class="eyebrow">
+                    Get in touch
+                </p>
+
+                <h1>Contact Us</h1>
+
+                <p class="subtitle">
+                    We would love to hear from you
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTACT CONTENT -->
+
+    <main class="contact-container">
+
+        <section class="contact-card">
+
+            <h2>Get in Touch</h2>
+
+            <p>
+                If you have any questions, feedback or
+                suggestions about Daily News, feel free
+                to contact us.
+            </p>
+
+        </section>
+
+
+        <!-- Contact Information -->
+
+        <section class="contact-card">
+
+            <h2>Contact Information</h2>
+
+            <div class="contact-item">
+
+                <span class="contact-icon"><i class="fa-solid fa-envelope"></i>
+
+                </span>
+
+                <div>
+                    <h3>Email</h3>
+
+                    <a href="mailto:info@dailynews.com">
+                        info@dailynews.com
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <span class="contact-icon"><i class="fa-solid fa-phone"></i>
+
+                </span>
+
+                <div>
+                    <h3>Phone</h3>
+
+                    <a href="tel:+64000000000">
+                        +64 00 000 0000
+                    </a>
+                </div>
+
+            </div>
+
+
+            <div class="contact-item">
+
+                <span class="contact-icon"><i class="fa-solid fa-location-arrow"></i>
+
+                </span>
+
+                <div>
+                    <h3>Location</h3>
+
+                    <p>
+                        Auckland, New Zealand
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Contact Form -->
+
+        <section class="contact-card">
+
+            <h2>Send Us a Message</h2>
+
+            <form id="contact-form">
+
+                <label for="name">
+                    Your Name
+                </label>
+
+                <input
+                    id="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    required
+                >
+
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <label for="message">
+                    Message
+                </label>
+
+                <textarea
+                    id="message"
+                    rows="5"
+                    placeholder="Write your message..."
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="contact-submit">
+                    Send Message
+                </button>
+
+            </form>
+
+            <p id="form-message"
+               class="form-message"
+               hidden>
+                Thank you! Your message has been submitted.
+            </p>
+
+        </section>
+
+
+        <a href="index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left-long"></i> Back to Daily News
+        </a>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+
+        <p>
+            © 2026 Daily News. All rights reserved.
+        </p>
+
+    </footer>
+
+    <script src="contactUs.js"> </script>
+
+<script> 
+
+     if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+
+</script>
+
+</body>
+
+</html>

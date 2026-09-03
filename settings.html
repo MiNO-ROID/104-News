@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Daily News</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="header-inner">
+
+            <a href="index.html" class="back-button">
+               <i class="fa-solid fa-arrow-left-long"></i>
+            </a>
+
+            <h1>Settings</h1>
+
+        </div>
+    </header>
+
+
+    <!-- SETTINGS -->
+    <main class="settings-container">
+
+        <section class="settings-card">
+
+            <h2> <i class="fa-solid fa-gear"> </i> Settings</h2>
+            <p class="settings-intro">
+                Customise your Daily News experience.
+            </p>
+
+
+            <!-- APPEARANCE -->
+            <div class="setting-section">
+
+                <div class="setting-title">
+                    <span class="setting-icon">
+                       <i class="fa-solid fa-moon"></i>
+                    </span>
+
+                    <div>
+                        <h3>Appearance</h3>
+                        <p>Choose how Daily News looks.</p>
+                    </div>
+                </div>
+
+                <div class="setting-options">
+                    <button class="option-button active" data-theme="light">
+                        <i class="fa-regular fa-circle"></i> Light
+                    </button>
+
+                    <button class="option-button" data-theme="dark">
+                       <i class="fa-solid fa-circle"> </i> Dark
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+            <div class="setting-section">
+
+                <div class="setting-title">
+                    <span class="setting-icon"><i class="fa-solid fa-bell"></i>
+
+                    </span>
+
+                    <div>
+                        <h3>Notifications</h3>
+                        <p>Receive updates about important news.</p>
+                    </div>
+                </div>
+
+                <label class="switch" title="Receive important news updates">
+                    <input type="checkbox" id="notification-toggle" aria-label="Receive important news updates" title="Receive important news updates">
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+
+            <!-- NEWS CATEGORIES -->
+            <div class="setting-section">
+
+                <div class="setting-title">
+                    <span class="setting-icon"><i class="fa-regular fa-newspaper"></i></span>
+
+                    <div>
+                        <h3>Preferred Categories</h3>
+                        <p>Select the types of news you are interested in.</p>
+                    </div>
+                </div>
+
+                <div class="category-options">
+
+                    <label>
+                        <input type="checkbox" checked>
+                        Technology
+                    </label>
+
+                    <label>
+                        <input type="checkbox" checked>
+                        Business
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Sports
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Science
+                    </label>
+
+                    <label>
+                        <input type="checkbox">
+                        Lifestyle
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- LANGUAGE -->
+            <div class="setting-section">
+
+                <div class="setting-title">
+                    <span class="setting-icon">
+                       <i class="fa-solid fa-earth-americas"></i>
+                        
+                    </span>
+
+                    <div>
+                        <h3>Language</h3>
+                        <p>Select your preferred language.</p>
+                    </div>
+                </div>
+            
+                 <select class="settings-select" title="Select your preferred language" aria-label="Select your preferred language">
+                    <option>English</option>
+                    <option>Nepali</option>
+                </select>
+
+            </div>
+
+
+            <!-- TEXT SIZE -->
+            <div class="setting-section">
+
+                <div class="setting-title">
+                    <span class="setting-icon"><i class="fa-solid fa-font"></i></span>
+
+                    <div>
+                        <h3>Text Size</h3>
+                        <p>Adjust the text size for easier reading.</p>
+                    </div>
+                </div>
+
+                <div class="setting-options">
+
+                    <button class="text-size-button" data-size="small">
+                        Small
+                    </button>
+
+                    <button class="text-size-button active" data-size="medium">
+                        Medium
+                    </button>
+
+                    <button class="text-size-button" data-size="large">
+                        Large
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+            <button class="save-settings" id="save-settings">
+                Save Settings
+            </button>
+
+            <p class="settings-message" id="settings-message"></p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>© 2026 Daily News. All rights reserved.</p>
+    </footer>
+
+ <script src="settings.js"></script>
+
+</body>
+</html>
