@@ -1,194 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A daily news application">
-    <title>Daily News</title>
-    <link rel="stylesheet" href="style.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A mobile daily news application">
+  <title>Daily News</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header class="site-header">
-
-    <div class="header-top">
-
-        <button
-            id="menu-button"
-            class="menu-button"
-            type="button"
-            aria-label="Open navigation menu"
-            aria-expanded="false"
-        >
-           <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <div class="header-content">
-            <p class="eyebrow">Stay informed</p>
-            <h1>Daily News</h1>
-            <p class="subtitle">The stories that matter today</p>
+    <div class="header-content">
+      <div class="header-row">
+        <div class="hamburger-slot" aria-label="Menu area"></div>
+        <div class="header-title">
+          <p class="eyebrow">Stay informed</p>
+          <h1>Daily News</h1>
+          <p class="subtitle">The stories that matter today</p>
         </div>
-
-    </div>
-
-</header>
-
-
-<!-- Hamburger Overlay -->
-<div id="menu-overlay" class="menu-overlay"></div>
-
-
-<!-- Hamburger Navigation -->
-<nav id="mobile-menu" class="mobile-menu">
-
-    <div class="menu-header">
-
-        <button
-            id="close-menu"
-            class="close-menu"
-            type="button"
-            aria-label="Close menu"
-        >
-            ×
+        <button id="search-toggle" class="search-toggle" type="button" aria-expanded="false" aria-controls="search-panel" aria-label="Open search and filters">
+          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg>
         </button>
-
-        <h2>
-            Daily<span>News</span>
-        </h2>
-
+      </div>
     </div>
+  </header>
 
+  <main class="app-container">
+    <section id="search-panel" class="controls" aria-label="News controls" hidden>
+      <div class="search-row">
+        <label class="search-box"><span class="sr-only">Search news</span><input id="search-input" type="search" placeholder="Search headlines..." autocomplete="off"></label>
+        <button id="close-search" class="close-search" type="button" aria-label="Close search">×</button>
+      </div>
+      <div id="category-list" class="category-list" aria-label="News categories">
+        <button class="category-button active" data-category="general">Top Stories</button>
+        <button class="category-button" data-category="technology">Technology</button>
+        <button class="category-button" data-category="business">Business</button>
+        <button class="category-button" data-category="sports">Sports</button>
+        <button class="category-button" data-category="science">Science</button>
+      </div>
+    </section>
 
-    <div class="menu-section">
+    <section id="home-view" class="app-view">
+      <section class="status-area" aria-live="polite"><p id="loading" class="status-message">Loading today's news...</p><p id="error" class="status-message error-message" hidden></p></section>
+      <section>
+        <div class="section-heading"><h2 id="feed-title">Top Stories</h2><button id="refresh-button" class="refresh-button" type="button">Refresh</button></div>
+        <div id="news-container" class="news-grid"></div>
+      </section>
+    </section>
 
-        <a href="#" data-menu-category="general">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
+    <section id="saved-view" class="app-view" hidden><div class="view-heading"><h2>Saved articles</h2><p>Articles you bookmark will appear here.</p></div><div id="saved-container" class="news-grid"></div></section>
+    <section id="settings-view" class="app-view" hidden><div class="view-heading"><h2>Settings</h2><p>These are the current news preferences for your app.</p></div><div class="settings-card"><div class="setting-row"><span>Country</span><strong>New Zealand</strong></div><div class="setting-row"><span>Language</span><strong>English</strong></div><div class="setting-row"><span>News provider</span><strong>Mediastack</strong></div></div></section>
+  </main>
 
-        <a href="#" data-menu-category="general">
-            <i class="fa-solid fa-fire"></i>
-            <span>Latest</span>
-        </a>
-
-        <a href="#" data-menu-category="general">
-            <i class="fa-solid fa-kiwi-bird"></i>
-            <span>New Zealand</span>
-        </a>
-
-        <a href="#" data-menu-category="general">
-           <i class="fa-solid fa-earth-americas"></i>
-            <span>World</span>
-        </a>
-
-        <a href="#" data-menu-category="business">
-            <i class="fa-solid fa-business-time"></i>
-            <span>Business</span>
-        </a>
-
-        <a href="#" data-menu-category="technology">
-           <i class="fa-solid fa-computer"></i>
-            <span>Technology</span>
-        </a>
-
-        <a href="#" data-menu-category="sports">
-           <i class="fa-solid fa-football"></i>
-            <span>Sports</span>
-        </a>
-
-        <a href="#" data-menu-category="general">
-           <i class="fa-solid fa-face-smile"></i>
-            <span>Entertainment</span>
-        </a>
-
-        <a href="#" data-menu-category="general">
-            <i class="fa-solid fa-children"></i>
-            <span>Lifestyle</span>
-        </a>
-
-    </div>
-
-
-    <div class="menu-divider"></div>
-
-
-    <div class="menu-section secondary-menu">
-
-        <a href="#">
-            <span class="menu-icon"><i class="fa-solid fa-download"></i></span>
-            <span>Saved Articles</span>
-        </a>
-
-        <a href="settings.html">
-            <i class="fa-solid fa-gear"></i>
-            <span>Settings</span>
-        </a>
-
-        <a href="about.html">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>About Us</span>
-        </a>
-
-        <a href="contactUs.html">
-            <i class="fa-solid fa-phone"></i>
-            <span>Contact Us</span>
-        </a>
-
-    </div>
-
-</nav>
-
-    <main class="app-container">
-        <section class="controls" aria-label="News controls">
-            <label class="search-box">
-                <span class="sr-only">Search news</span>
-                <input id="search-input" type="search" placeholder="Search headlines..." autocomplete="off">
-            </label>
-            <div id="category-list" class="category-list" aria-label="News categories">
-                <button class="category-button active" data-category="general">Top Stories</button>
-                <button class="category-button" data-category="technology">Technology</button>
-                <button class="category-button" data-category="business">Business</button>
-                <button class="category-button" data-category="sports">Sports</button>
-                <button class="category-button" data-category="science">Science</button>
-            </div>
-        </section>
-
-        <section class="status-area" aria-live="polite">
-            <p id="loading" class="status-message">Loading today's news...</p>
-            <p id="error" class="status-message error-message" hidden></p>
-        </section>
-
-        <section>
-            <div class="section-heading">
-                <h2 id="feed-title">Top Stories</h2>
-                <button id="refresh-button" class="refresh-button" type="button">Refresh</button>
-            </div>
-            <div id="news-container" class="news-grid"></div>
-        </section>
-        
-
-
-
-    </main>
-
-    <footer class="site-footer">
-        <p>News articles are provided by the configured news API.</p>
-    </footer>
-
-    <script src="script.js">
-
-    </script>
-
-    <script src="hamburger.js"> 
-        
-    </script>
-
-  <script>
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    }
-</script>
-
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-item active" type="button" data-view="home" aria-current="page"><span>Home</span></button>
+    <button class="nav-item" type="button" data-view="categories"><span>Categories</span></button>
+    <button class="nav-item" type="button" data-view="saved"><span>Saved</span></button>
+    <button class="nav-item" type="button" data-view="settings"><span>Settings</span></button>
+  </nav>
 </body>
 </html>
